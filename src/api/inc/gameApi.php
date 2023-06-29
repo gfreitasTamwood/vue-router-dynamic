@@ -16,11 +16,22 @@ $method = $_SERVER["REQUEST_METHOD"];
 
 switch($method) {
     case "GET":
-        GameDAO::startDb();
-        echo json_encode(
-            GameConverter::convertGame(
-                GameDAO::getAllGames()
-            )
-        );
+        $data = json_decode(file_get_contents("php://input"));
+        if (! isset($data) ) {
+            GameDAO::startDb();
+            echo json_encode(
+                GameConverter::convertGame(
+                    GameDAO::getAllGames()
+                )
+            );
+        } else {
+            if ($data->gameId) {
+                echo json_encode(
+                    GameConverter::convertGame(
+                        GameDAO::getOneGame($data->gameId)
+                    )
+                );
+            }
+        }
     break;
 }

@@ -16,6 +16,15 @@ class GameDAO {
         return self::$db->resultSet();
     }
 
+    public static function getOneGame(int $id) {
+        $sql = "SELECT * FROM game WHERE id=:id";
+        self::$db->query($id);
+        self::$db->bind(":id",$id);
+        self::$db->execute();
+
+        return self::$db->singleResult();
+    }
+
     public static function insertGame(Game $newGame) {
         $sql = "INSERT INTO INSERT INTO game(series,mainCharacter,image,name,type,price) VALUES (:series, :character,:image,:name,:type,:price)";
 
