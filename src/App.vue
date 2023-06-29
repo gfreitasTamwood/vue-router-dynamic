@@ -5,17 +5,22 @@
         Categories
       </h3>
     </aside>
-    <ProductGallery :gameList="this.resultApi" />
+    <section>
+      <ProductGallery :gameList="this.resultApi" />
+    </section>
   </div>
+  <ProductPage/>
 </template>
 
 <script>
 import ProductGallery from './components/pages/ProductGallery.vue'
+import ProductPage from './components/pages/ProductPage.vue'
 
 export default {
   name: 'App',
   components: {
-    ProductGallery
+    ProductGallery,
+    ProductPage
   },
   data() {
     return {

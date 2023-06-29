@@ -1,16 +1,17 @@
 <template>
-    <main class="container">
+    <main style="border: 1px solid black; padding
+    3%" class="container" @click="displayId">
         <figure class="left-column">
-            <!-- <img :src="" :alt=""> -->
+            <img :src="this.localGame.image" :alt="this.localGame.name">
         </figure>
         <section class="right-column">
             <div class="product-description">
                 <span>
-                    {{ $route.params.id }} - 
-                    {{ $route.params.type }}
+                    {{ this.localGame.id }} -
+                    {{ this.localGame.type }}
                 </span>
                 <h2>
-                    {{ $route.params.name }} - 
+                    {{ this.localGame.name }} - 
                 </h2>
                 <p>
                     <!-- Product Details -->
@@ -22,8 +23,39 @@
 </template>
 
 <script>
+
+
 export default {
     name: "ProductPage",
+    data() {
+        return {
+            localId: 0,
+            localGame: {}
+        }
+    },
+    methods: {
+        displayId(){
+            console.log(this.localId);
+            this.localId = this.$route.params.id;
+        },
+        async getGameData() {
+            try {
+                let response = await fetch("http://localhost:80/class-10/src/api/inc/gameApi.php",{
+                    method: "POST",
+                    body: JSON.stringify({
+                        requestedId: this.$route.params.id
+                    })
+                });
+                this.localGame = await response.json();
+                console.log(this.localGame);
+            } catch(error) {
+                console.log(error);
+            }
+        }
+    },
+    created() {
+        this.getGameData();
+    }
 }
 </script>
 

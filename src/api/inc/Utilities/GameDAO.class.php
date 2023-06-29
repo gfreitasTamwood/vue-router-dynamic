@@ -18,7 +18,8 @@ class GameDAO {
 
     public static function getOneGame(int $id) {
         $sql = "SELECT * FROM game WHERE id=:id";
-        self::$db->query($id);
+
+        self::$db->query($sql);
         self::$db->bind(":id",$id);
         self::$db->execute();
 

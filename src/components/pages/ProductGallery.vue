@@ -1,10 +1,10 @@
 <template>
-    <ul class="game-gallery-list">
+    <router-view/>
+    <ul v-if="checkRouter" class="game-gallery-list">
         <li v-for="game in gameList" :key="game.id">
             <GameCard :gameProps="game"/>
         </li>
     </ul>
-    <router-view/>
 </template>
 
 <script>
@@ -15,9 +15,27 @@ export default {
     props: {
         gameList: []
     },
+    data() {
+        return {
+            router: false
+        }
+    },
     components: {
         GameCard
     },
+    methods: {
+        checkRouter() {
+            if(this.$route.params.id) {
+                this.router = true;
+                console.log(this.router);
+            } else {
+                this.router = false;
+            }
+        }
+    },
+    created() {
+        this.checkRouter();
+    }
 }
 </script>
 

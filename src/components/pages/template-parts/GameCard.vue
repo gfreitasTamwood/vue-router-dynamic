@@ -18,7 +18,21 @@
                     ${{ gameProps.price }}
                 </span>
                 <!-- CHANGE TO ROUTER -->
-                <router-link class="btn" :to="`/gallery/${gameProps.id}`">
+                <!-- router.push({
+                    path: "/productpage/",
+                    params: {
+                        id: gameProps.id,
+                        series: gameProps.series,
+                        character: gameProps.character,
+                        image: gameProps.image,
+                        type: gameProps.type,
+                        price: gameProps.price
+                        name: gameProps.name,
+
+                    },
+                    name: "Product Page"
+                }); -->
+                <router-link class="btn" :to="`/productpage/${gameProps.id}`">
                     Product Page
                 </router-link>
             </div>
